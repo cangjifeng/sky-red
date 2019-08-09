@@ -1,9 +1,12 @@
-package java.org.jerfan.red.controller;
+package org.jerfan.red.controller;
 
 
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
+import org.jerfan.red.vo.TradeOrderBean;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,10 +17,13 @@ import java.util.List;
 public class PingController {
 
 
+    @Autowired
+    private RabbitTemplate template;
     @RequestMapping(value = "/start")
     public String start(){
+        return "sky red server start success ... ";
 
-        initFlowRules();
+        /*initFlowRules();
         while(true){
             String rs="";
             try{
@@ -26,8 +32,24 @@ public class PingController {
                 rs="error";
             }
             return rs;
-        }
+        }*/
 
+    }
+
+    @RequestMapping(value = "msg/send")
+    public String sendMsg(){
+
+        TradeOrderBean tradeOrderBean = new TradeOrderBean();
+        tradeOrderBean.setTradeNo("201908");
+        tradeOrderBean.setOrderNo("0809001");
+        tradeOrderBean.setOrderFrom("2");
+        try{
+            template.convertAndSend("CalonDirectExchange","CalonDirectRouting",tradeOrderBean);
+        }catch (Exception e){
+
+            System.out.println(e);
+        }
+        return "send messages successfully ...";
     }
 
 

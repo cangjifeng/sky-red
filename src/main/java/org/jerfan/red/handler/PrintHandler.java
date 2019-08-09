@@ -15,18 +15,20 @@ public class PrintHandler {
     public void printGreetWord(String word) {
         initFlowRules();
         Entry entry = null;
-        try {
-            entry = SphU.entry("helloSentinel");
-            System.out.println("hello " + word);
-            try{
-                Thread.sleep(300);
-            }catch (InterruptedException e){
-            }
-        } catch (BlockException e) {
-            System.out.println("block!");
-        } finally {
-            if (entry != null) {
-                entry.exit();
+        while(true){
+            try {
+                entry = SphU.entry("helloSentinel");
+                System.out.println("hello " + word);
+                try{
+                    Thread.sleep(300);
+                }catch (InterruptedException e){
+                }
+            } catch (BlockException e) {
+                System.out.println("block!");
+            } finally {
+                if (entry != null) {
+                    entry.exit();
+                }
             }
         }
 

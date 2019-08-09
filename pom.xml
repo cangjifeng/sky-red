@@ -12,11 +12,13 @@
     <artifactId>sky-red</artifactId>
     <version>1.0.0</version>
     <name>sky-red</name>
+    <packaging>jar</packaging>
     <description>sky red project for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
         <version.sentinel-core>1.6.3</version.sentinel-core>
+        <version.sentinel-transport-simple-http>1.6.3</version.sentinel-transport-simple-http>
     </properties>
 
     <dependencies>
@@ -35,6 +37,15 @@
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-core</artifactId>
             <version>${version.sentinel-core}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-transport-simple-http</artifactId>
+            <version>${version.sentinel-transport-simple-http}</version>
         </dependency>
     </dependencies>
 
