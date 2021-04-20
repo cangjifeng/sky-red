@@ -16,7 +16,6 @@
 
 
 
-
     <properties>
         <java.version>1.8</java.version>
         <version.sentinel-core>1.6.3</version.sentinel-core>
